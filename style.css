@@ -121,18 +121,28 @@ header nav{
 header nav ul{
   float: left;
 }
+header nav #menu{
+  border-left: 1px solid black;
+
+}
+
 header nav ul li{
+  /* border-left: solid black; */
+  border-width: 1px;
   float: left;
   list-style: none;
 }
 header nav ul li a{
+  margin: 10px;
   font-family: arial;
-  font-size: 16px;
+  font-size: 20px;
   color: #111;
-  line-height: 63px;
+  line-height: 60px;
 }
 header .nav-login{
   float: right;
+  position: relative;
+  left: 212px;
 }
 header .nav-login form{
   float: left;
@@ -176,8 +186,36 @@ header .nav-login a{
   font-family: arial;
   font-size: 16px;
   color: #111;
-  line-height: 63px;
+  line-height: 60px;
   cursor: pointer;
+}
+header .user-container{
+  width: 250px;
+  /* overflow: hidden; */
+}
+header .user-container img{
+  display: block;
+  position: relative;
+  top: -3px;
+  float: left;
+  margin-right: 10px;
+  width: 44px;
+  height: 63px;
+  overflow: hidden;
+}
+header .user-container div{
+  float: left;
+}
+header .user-container p{
+  margin: 10px;
+  line-height: 20px;
+  font-family: arial;
+}
+header h2{
+  font-family: arial;
+  text-align: center;
+  font-size: 25px;
+  margin-top: 15px;
 }
 .main-container{
   padding-top: 40px;
@@ -222,4 +260,57 @@ header .nav-login a{
 }
 .signup-form button:hover{
 background-color: #111
+}
+
+
+aside .upload form{
+  border-radius: 5px;
+  float: right;
+  width: 400px;
+  background-color: #fff;
+  margin-right: 10px;
+}
+aside .upload form input{
+  padding: 15px;
+}
+aside .upload form button{
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  float: right;
+  width: 100px;
+  height: 52px;
+  /* margin: -4px; */
+  border: none;
+  background-color: #f3f3f3;
+  font-family: arial;
+  font-size: 14px;
+  color: #111;
+  cursor: pointer;
+}
+aside .upload form button:hover{
+    background-color: lightgreen;
+}
+
+aside .delete{
+  position: relative;
+  top: 70px;
+  left: 400px;
+}
+aside .delete form button{
+  border-radius: 2px;
+  text-align: center;
+  float: right;
+  width: 100px;
+  height: 52px;
+  border: none;
+  font-family: arial;
+  font-size: 14px;
+  background-color: #f3f3f3;
+  color: #111;
+  cursor: pointer;
+}
+aside .delete form button:hover{
+    background-color: red;
+    border: solid black;
+    border-width: 1px;
 }
