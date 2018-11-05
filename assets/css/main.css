@@ -2647,7 +2647,9 @@
 	}
 .nav-login{
 	float: right;
+    text-align: center;
 	}
+
 nav {
 	width  : 100%;
 	height : 60px;
@@ -2687,7 +2689,11 @@ nav ul li{
 	margin :  0px 10px 0px 0px;
 	float: left;
 	cursor: pointer;
-	}
+    }
+.signup_text{
+    font-size: 30px;
+
+    }
 .signup-form{
 	width : 400px;
 	margin : 5% auto;
@@ -2775,4 +2781,86 @@ nav ul li{
 	width: 100%;
 	border-top-left-radius: 4px;
 	border-top-right-radius: 4px;
+	}
+.commentaire-box{
+    /*padding: 30px;*/
+    width : 40%;
+    margin : auto;
+	}
+.commentaire {
+    margin-bottom: 1em;
+    border-radius    : 4px;
+    border           : solid 1px rgba(255, 255, 255, 0.25);
+    background-color : rgba(255, 255, 255, 0.1);
+    }
+.commentaire h3 {
+    text-decoration: underline;
+    text-decoration-color: rgba(255, 255, 255, 0.25);
+    padding-left: 0.5em;
+    font-size: 18px;
+    margin-bottom: 0px;
+    }
+.commentaire p {
+    padding-left: 1em;
+    margin-bottom: 0px;
+    font-size: 18px;
+    color : #fff;
+    }
+.commentaire-form{
+    width : 35%;
+    margin : 5% auto;
+    }
+
+.commentaire-form button{
+    display : block;
+    margin : 10px auto;
+    width: 30%;
+    height: 40px;
+    border : none;
+    font-size: 16px;
+    cursor : pointer;
+    }
+.titre-commentaire{
+    text-align: center;
+    font-size: 22px;
+    }
+.search{
+    padding-top: 15px;
+    }
+.icon.style3 {
+    /*-moz-transition: all 0.2s ease;*/
+    /*-webkit-transition: all 0.2s ease;*/
+    /*-ms-transition: all 0.2s ease;*/
+    /*transition: all 0.2s ease;*/
+    border-radius: 100%;
+    display: inline-block;
+    padding: 0.2em;
+    border: solid 1px rgba(255, 255, 255, 0.25);
+    background-color: rgba(255, 255, 255, 0.075);
+    }
+
+.icon.style3:before {
+    display: block;
+    width: 1.25em;
+    height: 1.25em;
+    line-height: 1.25em;
+    font-size: 1.35em;
+    }
+
+.icon.style3:hover {
+    background-color: rgba(255, 255, 255, 0.25);
+    }
+
+@media screen and (max-width: 736px) {
+
+    .icon.style3:before {
+        font-size: 1em;
+        }
+
+    }
+.image_commentaire
+{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
 	}

@@ -19,7 +19,11 @@ session_start();
                 <a href="index.php">Home</a>
             </li>
         </ul>
+    </div>
         <div class="nav-login">
+                <ul class="search">
+                    <li><a href="search.php" class="icon style3 fa-search" "><span class="label">Search</span></a></li>
+                </ul>
             <?php
             if(isset($_SESSION['u_id']))
             {
@@ -34,11 +38,10 @@ session_start();
                                         <input type="password" name="pwd" placeholder="Password">
                                         <button type="submit" name="submit">Login</button>
                                      </form>
-                                    <a href="signup.php">Sign up</a>';
+                                    <a href="signup.php" class="signup_text">Sign up</a>';
             }
             ?>
         </div>
-    </div>
 </nav>
 
 <!--<html>-->

@@ -51,7 +51,7 @@ session_start();
                             mysqli_query($connexion, $sql);
                         }
                     }
-                    header("Location: ../signup.php?signup=sucess");
+                    header("Location: ../signup.php?index.php=sucess");
                     exit();
                 }
             }

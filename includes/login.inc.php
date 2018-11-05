@@ -14,7 +14,8 @@ if(isset($_POST['submit']))
         $sql = "SELECT * FROM users WHERE user_uid=? OR user_email=?;";
         $stmt = mysqli_stmt_init($connexion);
         if (!mysqli_stmt_prepare($stmt, $sql))
-            echo "SQL statement error"; else {
+            echo "SQL statement error";
+        else {
             mysqli_stmt_bind_param($stmt, "ss", $uid, $email);
             mysqli_stmt_execute($stmt);
             $result = mysqli_stmt_get_result($stmt);
