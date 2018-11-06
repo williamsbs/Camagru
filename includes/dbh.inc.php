@@ -7,7 +7,7 @@
 //$connexion = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
 try
 {
-    $connexion = new PDO('mysql:host=localhost;dbname=loginsystem', 'root', 'root');
+    $connexion = new PDO('mysql:host=localhost;dbname=loginsystem', 'root', '123456');
     $connexion->setAttribute(PDO::ATTR_ERRMODE ,PDO::ERRMODE_EXCEPTION);
 }
 catch (PDOException $e){

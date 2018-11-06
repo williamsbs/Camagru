@@ -6,24 +6,28 @@ $sql = "SELECT * FROM uploaded_img WHERE user_id ='$_SESSION[u_id]'";
 $result = $connexion->query($sql);
 if($result->rowCount() > 0)
 {
+    echo "<div style = 'display:'>";
     while($row = $result->fetch(PDO::FETCH_ASSOC))
     {
-        echo "<div id='upload'>
-                    <section id='main'>
-                        <section class='upload_img'>
-                            <div class='image_commentaire'>
+        echo "
+
+                        <section class='up_upload_img' style= '
+    width: 250px;'>
+
                                 <a href='image_commentaire.php?image=plage.jpg'>
                                 <img src='images/". $row[img_name] ." '>
                                  $row[description]
                                 </a>
-                            </div>
+
                         </section>
-                    </section>
-                </div>";
+
+           ";
 
     }
+    echo "</div>";
+
 }
-echo "<div id='upload_box'>";
+echo "<div id='upload_box' style=' display: inline-block; width: 100%'>";
 echo"<div class='up_upload'>";
 if(isset($_SESSION['u_id']))
 {
@@ -35,6 +39,11 @@ if(isset($_SESSION['u_id']))
     echo '<form action="upload_details.php" method="POST">
                        <button type="submit" name="submit">New image</button>
                         </form>';
+    echo "<div class='up_delete'>";
+    echo '<form action="includes/delete.inc.php" method="POST">
+                       <button type="submit" name="submit">Delete profile image</button>
+                        </form>';
+    echo "</div>";
 }
 else
 {
@@ -44,6 +53,6 @@ else
 echo "</div>";
 echo "</div>";
 
-include_once "footer.php";
+//include_once "footer.php";
 
 ?>

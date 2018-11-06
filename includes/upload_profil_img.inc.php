@@ -21,7 +21,7 @@ if(isset($_POST['submit']))
     {
         if($fileError === 0)
         {
-            if($fileSize < 1000000)
+            if($fileSize < 100000000)
             {
                $fileNewName = "profil".$id.".".$fileActualExtention;// donne un id uniq aux image pour pas qu'on upload 2 img du mm nom et quelle se remplace
                 $fileDestination = "../images/".$fileNewName;
@@ -46,7 +46,4 @@ if(isset($_POST['submit']))
     {
         echo "You cannot upload files of this type";
     }
-
-
-
 }
