@@ -17,10 +17,10 @@ echo "<section class='thumbnails'>
 <div class="commentaire-box">
     <?php
     $sql = "SELECT * FROM commentaire WHERE image='$image';";
-    $result = mysqli_query($connexion, $sql);
-    if (mysqli_num_rows($result) > 0)
+    $result = $connexion->query($sql);
+    if ($result->rowCount() > 0)
     {
-        while ($row = mysqli_fetch_assoc($result))
+        while ($row = $result->fetch(PDO::FETCH_ASSOC))
         {
             echo "<div class='commentaire'>
             <h3>".$row['user_id']." :</h3>

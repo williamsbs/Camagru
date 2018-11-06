@@ -8,15 +8,15 @@
 try
 {
     $connexion = new PDO('mysql:host=localhost;dbname=loginsystem', 'root', 'root');
+    $connexion->setAttribute(PDO::ATTR_ERRMODE ,PDO::ERRMODE_EXCEPTION);
 }
 catch (PDOException $e){
-    echo "la base de donner est pas dispo";
+    echo "Connection failed: ".$e->getMessage() ;
 }
-$sql = "SELECT * FROM users";
-$result = $connexion->query($sql);
-while($row = $result->fetch(PDO::FETCH_ASSOC))
-{    echo "</br>";
-
-    print_r($row);
-    echo "</br>";
-}
+//$sql = "INSERT INTO users (user_first, user_last, user_email, user_uid, user_pwd)
+//                        VALUES (?, ?, ?, ?, ?);";
+//$statement = $connexion->prepare($sql);
+//
+//while($row = $result->fetch(PDO::FETCH_ASSOC))
+//{
+//}

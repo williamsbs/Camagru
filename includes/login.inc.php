@@ -5,28 +5,26 @@ if(isset($_POST['submit']))
     include "dbh.inc.php";
     include_once "handlers.inc.php";
 
-    $uid = mysqli_real_escape_string($connexion,$_POST['uid']);
-    $email = mysqli_real_escape_string($connexion,$_POST['uid']);
-    $pwd = mysqli_real_escape_string($connexion,$_POST['pwd']);
+    $uid = $_POST['uid'];
+    $email = $_POST['uid'];
+    $pwd = $_POST['pwd'];
 
     if(handlers_login($uid, $pwd) == 1)
     {
         $sql = "SELECT * FROM users WHERE user_uid=? OR user_email=?;";
-        $stmt = mysqli_stmt_init($connexion);
-        if (!mysqli_stmt_prepare($stmt, $sql))
+        $stmt = $connexion->prepare($sql);
+        if (!$stmt = $connexion->prepare($sql))
             echo "SQL statement error";
         else {
-            mysqli_stmt_bind_param($stmt, "ss", $uid, $email);
-            mysqli_stmt_execute($stmt);
-            $result = mysqli_stmt_get_result($stmt);
-            $resultCheck = mysqli_num_rows($result);
-            if ($resultCheck < 1) {
+            $stmt->execute(array($uid, $email));
+            $check = $stmt->rowCount();
+            if ($check < 1) {
                 header("Location: ../index.php?login=error");
                 exit();
             }
             else
             {
-                if($row = mysqli_fetch_assoc($result))
+                if($row = $stmt->fetch(PDO::FETCH_ASSOC))
                 {
                    if(($hasedPwd = password_verify($pwd, $row['user_pwd'])) == FALSE)// dehash le pwd;
                     {

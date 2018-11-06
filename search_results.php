@@ -4,17 +4,17 @@ include "includes/dbh.inc.php";
 if(isset($_POST['submit']))
 {
     clearstatcache();
-    $search = mysqli_real_escape_string($connexion, $_POST['search']);
+    $search = $_POST['search'];
     ?>
 <div class="commentaire-box">
     <?php
     $sql = "SELECT * FROM commentaire WHERE user_id LIKE '%$search%' OR commentaire LIKE '%$search%' OR a_date LIKE '%$search%' OR image LIKE '%$search%'";
-    $result = mysqli_query($connexion, $sql);
-    $resultCheck = mysqli_num_rows($result);
+    $result = $connexion->query($sql);
+    $resultCheck = $result->rowCount();
     if($resultCheck > 0)
     {
         echo "<h1>There are ".$resultCheck." results!</h1>";
-        while($row = mysqli_fetch_assoc($result))
+        while($row = $result->fetch(PDO::FETCH_ASSOC))
         {
             echo "<div class='commentaire'>
             <h3>".$row['user_id']." :</h3>

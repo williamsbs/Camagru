@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once "dbh.inc.php";
+include "dbh.inc.php";
 $id = $_SESSION['id'];
 if(isset($_POST['submit']))
 {
@@ -27,10 +27,10 @@ if(isset($_POST['submit']))
                 $fileDestination = "../images/".$fileNewName;
                 move_uploaded_file($fileTmpLocation, $fileDestination);
                 $sql = "UPDATE profil_img SET status=0 WHERE userid='$id';";
-                $result = mysqli_query($connexion, $sql);
+                $connexion->query($sql);
                 clearstatcache();
-                $_SESSION['img'] = 1;
-                header("Location: ../upload_img.php?sucess");
+//                $_SESSION['img'] = 1;
+                header("Location: ../upload_profil_img.php?sucess");
             }
             else
             {
