@@ -10,6 +10,7 @@ session_start();
         $email = $_POST['email'];
         $uid = $_POST['uid'];
         $pwd = $_POST['pwd'];
+        $cle = md5(microtime(TRUE)*100000);
 
         if (handlers_signup($first, $last, $email, $uid, $pwd) == 1)
         {
@@ -29,13 +30,13 @@ session_start();
                 else
                 {
                     $hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
-                    $sql = "INSERT INTO users (user_first, user_last, user_email, user_uid, user_pwd)
-                        VALUES (?, ?, ?, ?, ?);";
+                    $sql = "INSERT INTO users (user_first, user_last, user_email, user_uid, user_pwd, user_cle, user_actif)
+                        VALUES (?, ?, ?, ?, ?, ?, ?);";
                     $statement = $connexion->prepare($sql);
                     if (!$statement = $connexion->prepare($sql)) // preprar une reauete SQL query, pour la session de travail $statement
                         echo "SQL error";
                     else
-                        $statement->execute(array($first, $last, $email, $uid, $hashedPwd));
+                        $statement->execute(array($first, $last, $email, $uid, $hashedPwd, $cle, 0));
                     $sql = "SELECT * FROM users WHERE user_uid='$uid' AND user_first='$first';";
                     $result = $connexion->query($sql);
                     if ($result->rowCount() > 0)
@@ -48,7 +49,22 @@ session_start();
                             $image_value->execute(array($userid, 1));
                         }
                     }
-                    header("Location: ../index.php?index.php=sucess");
+//                    $destinataire = $email;
+//                    $sujet = "Activer votre compte";
+//                    $entete = "From: bobsabates@gmail.com";
+//                    $message = 'Bienvenue sur VotreSite,';
+//                    mail($destinataire, $sujet, $message, $entete);
+
+//
+//                    Pour activer votre compte, veuillez cliquer sur le lien ci dessous
+//                    ou copier/coller dans votre navigateur internet.
+//
+//                    http://localhost:8080/camagru/validation.php?log='.urlencode($uid).'&cle='.urlencode($cle).'
+//
+//
+//                    ---------------
+//                    Ceci est un mail automatique, Merci de ne pas y répondre.';
+                    header("Location: ../validation.php?index.php=sucess");
                     exit();
                 }
             }

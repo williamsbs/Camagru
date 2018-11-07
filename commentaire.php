@@ -22,7 +22,7 @@ if ($result->rowCount() > 0)
     }
 }
 ?>
-</div>;
+</div>
 <?php
 if(isset($_SESSION['u_id']))
 {

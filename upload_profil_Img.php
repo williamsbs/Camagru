@@ -58,7 +58,7 @@ include_once "header.php";
 //            {
                 echo "</div>";
                 echo "<div class='delete'>";
-                echo '<form action="includes/delete.inc.php" method="POST">
+                echo '<form action="includes/delete_profil.inc.php" method="POST">
                        <button type="submit" name="submit">Delete profile image</button>
                         </form>';
                 echo "</div>";

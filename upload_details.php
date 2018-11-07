@@ -37,6 +37,10 @@ else {
         echo "<h1>You did not fill in all fields</h1>";
         exit();
     }
+    else if ($detailsCheck == 'titleTaken') {
+        echo "<h1>The title for this is already taken</h1>";
+        exit();
+    }
 }
     ?>
     </div>

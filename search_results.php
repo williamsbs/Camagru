@@ -13,24 +13,39 @@ if(isset($_POST['submit']))
     $resultCheck = $result->rowCount();
     if($resultCheck > 0)
     {
+        $sqlImg = "SELECT * FROM uploaded_img WHERE img_name LIKE '%$search%';";
+        $resultImg = $connexion->query($sqlImg);
+        $rowImg = $resultImg->fetch(PDO::FETCH_ASSOC);
         echo "<h1>There are ".$resultCheck." results!</h1>";
         while($row = $result->fetch(PDO::FETCH_ASSOC))
         {
+            if($resultImg->rowCount() > 0)
+            {
+                echo "<section class='thumbnails'>
+                            <div class='image_commentaire'>
+                                <a href='image_commentaire.php?image=" . $rowImg[img_name] . "'target='_blank'>
+                                <img  src='images/" . $rowImg[img_name] . "' />
+                                <h3>$rowImg[description]</h3>
+                                $rowImg[nb_likes]
+                                </a>
+                            </div>
+                        </section>";
+            }
             echo "<div class='commentaire'>
+               <a href='image_commentaire.php?image=" . $rowImg[img_name] . "'target='_blank'>
             <h3>".$row['user_id']." :</h3>
             <p><strong>".$row['commentaire']."</strong></p>
             <p>".$row['a_date']."</p>
              </div>";
         }
-    }
-    else{
+    } else {
         echo "<h1>There a not results for your search</h1>";
         header("Location: search.php?search=error");
     }
+}
+
     ?>
 </div>
 <?php
-
-}
 include_once 'footer.php';
 ?>

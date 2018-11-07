@@ -30,6 +30,11 @@ session_start();
                 echo '<form action="includes/logout.inc.php" method="POST">
                                          <button type="submit" name="submit">Logout</button>
                                     </form>';
+                echo '<form action="Compte.php" method="POST">
+                                         <button class="nav-login" type="submit" name="Modif">Compte</button>
+                                    </form>';
+
+
             }
             else
             {

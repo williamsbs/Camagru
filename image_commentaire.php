@@ -4,11 +4,15 @@ include_once "header.php";
 include "includes/dbh.inc.php";
 
 $image = $_GET['image'];
+$sql = "SELECT * FROM uploaded_img WHERE img_name='$image'";
+$result = $connexion->query($sql);
+$row = $result->fetch(PDO::FETCH_ASSOC);
 echo "<section class='thumbnails'>
         <div class='image_commentaire'>
         <a href='images/" . $image . "'>
             <img  src='images/" . $image . "' />
-            <h3>Lorem ipsum dolor sit amet</h3>
+            <h3>$row[description]</h3>
+            $row[nb_likes]
         </a>
         </div>
     </section>
@@ -31,7 +35,22 @@ echo "<section class='thumbnails'>
     }
     ?>
     <?php
-if(isset($_SESSION['u_id']))
+    $sql = "SELECT * FROM likes WHERE image='$image';";
+    $result = $connexion->query($sql);
+    echo "<fieldset class='like-box'>";
+    echo "<legend><strong>Likes:</strong></legend>";
+    echo "<div >";
+    if($result->rowCount() > 0) {
+        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+            echo "<div>$row[user_id]<div>";
+        }
+    }else{
+        echo "Nobody as liked this picture";
+    }
+    echo "</div>";
+    echo "</fieldset>";
+
+    if(isset($_SESSION['u_id']))
 {
     echo "
     <div class='commentaire-form'>
@@ -40,7 +59,33 @@ if(isset($_SESSION['u_id']))
             <button type='submit' name='submit'>Envoyer</button>
         </form>
     </div>
+      <div class='commentaire-form'>
+        <form action='includes/commentaire.inc.php?image=" . $image . "' method='POST'>
+            <button class=\"icon style4 fa-thumbs-up\" type='submit' name='like'></button>
+            <button class=\"icon style4 fa-thumbs-down\" type='submit' name='dislike'></button>
+        </form>
+    </>
     ";
 }
+
 ?>
+    <div class="msg">
+    <?php
+    if(!isset($_GET['like']))
+    {
+        exit();
+    }
+    else {
+        $DELCheck = $_GET['like'];
+
+        if ($DELCheck == 'error') {
+            echo "<h1>You have already liked this image</h1>";
+            exit();
+        }
+        if ($DELCheck == 'dislike') {
+            echo "<h1>You have already disliked this picture</h1>";
+            exit();
+        }
+    }
+    ?>
 </div>

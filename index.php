@@ -4,6 +4,9 @@ include_once "includes/dbh.inc.php";
 include_once "header.php";
 
 ?>
+<form action="img_galery.php" method="POST">
+    <button class="nav-login" type="submit" name="Uplaod">Upload image</button>
+</form>
 <div id="wrapper">
     <header id="header"?>
         <div id="header">
@@ -50,45 +53,61 @@ include_once "header.php";
         </div>
     </header>
 <section id="main">
-
-    <!-- Thumbnails -->
-    <section class="thumbnails">
-        <div>
-            <a href="image_commentaire.php?image=plage.jpg">
-                <img src="images/plage.jpg" alt="" />
-                <h3>Lorem ipsum dolor sit amet</h3>
+    <?php
+    $sql = "SELECT * FROM uploaded_img";
+    $result = $connexion->query($sql);
+    while($row = $result->fetch(PDO::FETCH_ASSOC)) {
+        echo "<section class='thumbnails'>
+        <div class='image_commentaire'>
+            <a href='image_commentaire.php?image=" . $row[img_name]. "'target='_blank'>
+                <img  src='images/" . $row[img_name]. "' />
+                <strong>$row[user_id]</strong>
+                <h3>$row[description]</h3>
+                Likes: $row[nb_likes]
             </a>
-            <a href="image_commentaire.php?image=amesterdam.jpg">
-                <img src="images/amesterdam.jpg" alt="" />
-                <h3>Lorem ipsum dolor sit amet</h3>
-            </a>
-        </div>
-        <div>
-            <a href="images/fulls/03.jpg">
-                <img src="images/thumbs/03.jpg" alt="" />
-                <h3>Lorem ipsum dolor sit amet</h3>
-            </a>
-            <a href="images/sunset.jpg">
-                <img src="images/sunset.jpg" alt="" />
-                <h3>Lorem ipsum dolor sit amet</h3>
-            </a>
-            <a href="images/facebook.jpg">
-                <img src="images/facebook.jpg" alt="" />
-                <h3>Lorem ipsum dolor sit amet</h3>
-            </a>
-        </div>
-        <div>
-            <a href="images/notredame.jpg">
-                <img src="images/notredame.jpg" alt="" />
-                <h3>Lorem ipsum dolor sit amet</h3>
-            </a>
-            <a href="images/fulls/07.jpg">
-                <img src="images/fulls/07.jpg" alt=""/>
-                <h3>Lorem ipsum dolor sit amet</h3>
-            </a>
-
         </div>
     </section>
+    ";
+    }
+    ?>
+    <!-- Thumbnails -->
+<!--    <section class="thumbnails">-->
+<!--        <div>-->
+<!--            <a href="image_commentaire.php?image=plage.jpg">-->
+<!--                <img src="images/plage.jpg" alt="" />-->
+<!--                <h3>Lorem ipsum dolor sit amet</h3>-->
+<!--            </a>-->
+<!--            <a href="image_commentaire.php?image=amesterdam.jpg">-->
+<!--                <img src="images/amesterdam.jpg" alt="" />-->
+<!--                <h3>Lorem ipsum dolor sit amet</h3>-->
+<!--            </a>-->
+<!--        </div>-->
+<!--        <div>-->
+<!--            <a href="images/fulls/03.jpg">-->
+<!--                <img src="images/thumbs/03.jpg" alt="" />-->
+<!--                <h3>Lorem ipsum dolor sit amet</h3>-->
+<!--            </a>-->
+<!--            <a href="images/sunset.jpg">-->
+<!--                <img src="images/sunset.jpg" alt="" />-->
+<!--                <h3>Lorem ipsum dolor sit amet</h3>-->
+<!--            </a>-->
+<!--            <a href="images/facebook.jpg">-->
+<!--                <img src="images/facebook.jpg" alt="" />-->
+<!--                <h3>Lorem ipsum dolor sit amet</h3>-->
+<!--            </a>-->
+<!--        </div>-->
+<!--        <div>-->
+<!--            <a href="images/notredame.jpg">-->
+<!--                <img src="images/notredame.jpg" alt="" />-->
+<!--                <h3>Lorem ipsum dolor sit amet</h3>-->
+<!--            </a>-->
+<!--            <a href="images/fulls/07.jpg">-->
+<!--                <img src="images/fulls/07.jpg" alt=""/>-->
+<!--                <h3>Lorem ipsum dolor sit amet</h3>-->
+<!--            </a>-->
+<!---->
+<!--        </div>-->
+<!--    </section>-->
 
 </section>
 <!--<section class="main-container">-->

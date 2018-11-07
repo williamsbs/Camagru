@@ -5,13 +5,12 @@ include 'dbh.inc.php';
 $id = $_SESSION['id'];
 $uid = $_SESSION['u_id'];
 
-$fileName = "images/profil".$id.".jpg";
+$fileName = "../images/profil".$id."*";
 $fileInfo = glob($fileName);
 $fileExt = explode(".", $fileInfo[0]);
-$fileActualExt = $fileExt[1];
+$fileActualExt = $fileExt[3];
 
-$file = "images/profil".$id.".".$fileActualExt;
-
+$file = "../images/profil".$id.".".$fileActualExt;
 if (!unlink($file))
 {
     echo "File was not deleted";
@@ -22,8 +21,5 @@ else
 }
 $sql = "UPDATE profil_img SET status=1 WHERE userid='$id';";
 $connexion->query($sql);
-//mysqli_query($connexion, $sql);
-//$sql = "UPDATE profil_img SET status=1 WHERE userid='$sessionId';";
-//mysqli_query($sql, $connexion);
 $_SESSION['img'] = 0;
 header("Location: ../upload_profil_Img.php?delete=success");
