@@ -54,14 +54,27 @@ include_once "header.php";
     </header>
 <section id="main">
     <?php
-    $sql = "SELECT * FROM uploaded_img";
+    $imgParPages = 5;
+    $imageTotalesReq = $connexion->query("SELECT * FROM uploaded_img");
+    $imageTotales = $imageTotalesReq->rowCount();
+    $pageTotales = ceil($imageTotales/$imgParPages); // arrondie au nombre superieur pour pas avoir un nombre a virgule
+    if(isset($_GET['page']) AND !empty($_GET['page']) AND $_GET['page'] > 0)
+    {
+        $_GET['page'] = intval($_GET['page']);// si on met une phrase ca remplace par un 0
+        $pageCourante = $_GET['page'];
+    }else{
+        $pageCourante = 1;
+    }
+    $depart = ($pageCourante - 1)*$imgParPages;
+    $sql = "SELECT * FROM uploaded_img LIMIT $depart,$imgParPages";
     $result = $connexion->query($sql);
+
     while($row = $result->fetch(PDO::FETCH_ASSOC)) {
         echo "<section class='thumbnails'>
         <div class='image_commentaire'>
             <a href='image_commentaire.php?image=" . $row[img_name]. "'target='_blank'>
                 <img  src='images/" . $row[img_name]. "' />
-                <strong>$row[user_id]</strong>
+                publier par: <strong>$row[user_id]</strong>
                 <h3>$row[description]</h3>
                 Likes: $row[nb_likes]
             </a>
@@ -125,8 +138,21 @@ include_once "header.php";
 //        ?>
     </div>
 <!--</section>-->
-
 <?php
+echo "<div class='page'>";
+for($i = 1; $i <=$pageTotales; $i++)
+{
+    if($i == $pageCourante)
+    {
+        echo "<a href='#' style='border: 1px solid white; padding: 2px'>$i </a>";
+//        border: 1px solid white;
+    }
+    else{
+        echo "<a href='index.php?page=$i' class='page1'>. $i .</a>";
+
+    }
+}
+echo "</div>";
 include_once "footer.php";
 ?>
 

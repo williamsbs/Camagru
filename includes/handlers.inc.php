@@ -13,6 +13,26 @@ function handlers_signup($first, $last, $email, $uid, $pwd)
             header("Location: ../signup.php?signup=InvalidCharacter&email=$email&uid=$uid");
             exit();
         }
+        if (!preg_match('~[0-9]+~', $pwd)) // veridie si les caractere rentrer sont valide
+        {
+            header("Location: ../signup.php?signup=WrongPwdFormat&first=$first&last=$last&email=$email&uid=$uid");
+            exit();
+        }
+        if (!preg_match('~[a-z]+~', $pwd)) // veridie si les caractere rentrer sont valide
+        {
+            header("Location: ../signup.php?signup=WrongPwdFormat&first=$first&last=$last&email=$email&uid=$uid");
+            exit();
+        }
+        if (!preg_match('~[A-Z]+~', $pwd)) // veridie si les caractere rentrer sont valide
+        {
+            header("Location: ../signup.php?signup=WrongPwdFormat&first=$first&last=$last&email=$email&uid=$uid");
+            exit();
+        }
+        if (strlen($pwd) < 6) // veridie si les caractere rentrer sont valide
+        {
+            header("Location: ../signup.php?signup=WrongPwdFormat&first=$first&last=$last&email=$email&uid=$uid");
+            exit();
+        }
         else
         {
             if (!filter_var($email, FILTER_VALIDATE_EMAIL)) // verifie un email valid

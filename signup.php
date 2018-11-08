@@ -58,6 +58,10 @@ include_once "header.php";
             echo "<h1>Invalid character</h1>";
             exit();
         }
+        else if($signupCheck == 'WrongPwdFormat'){
+            echo "<h1>Your password must be at least 6 characters and contain one number, one letter and one capital letter</h1>";
+            exit();
+        }
         else if($signupCheck == 'InvalidEmail'){
             echo "<h1>Invalid Email</h1>";
             exit();

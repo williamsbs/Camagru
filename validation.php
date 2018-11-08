@@ -5,7 +5,6 @@ include_once "header.php";
 <h1 style="text-align: center">Please Check your emails to activate your account</h1>
 <?php
 include_once "footer.php";
-
 //
 //require 'PHPMailer/src/Exception.php';
 //require 'PHPMailer/src/PHPMailer.php';

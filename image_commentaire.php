@@ -11,6 +11,7 @@ echo "<section class='thumbnails'>
         <div class='image_commentaire'>
         <a href='images/" . $image . "'>
             <img  src='images/" . $image . "' />
+            publier par: <strong>$row[user_id]</strong>
             <h3>$row[description]</h3>
             $row[nb_likes]
         </a>
