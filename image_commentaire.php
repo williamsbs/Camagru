@@ -3,7 +3,7 @@ session_start();
 include_once "header.php";
 include "includes/dbh.inc.php";
 
-$image = $_GET['image'];
+$image = htmlspecialchars($_GET['image']);
 $sql = "SELECT * FROM uploaded_img WHERE img_name='$image'";
 $result = $connexion->query($sql);
 $row = $result->fetch(PDO::FETCH_ASSOC);

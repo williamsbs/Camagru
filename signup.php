@@ -6,28 +6,28 @@ include_once "header.php";
         <form class="signup-form" method="POST" action="includes/signup.inc.php">
             <?php
             if(isset($_GET['first'])){
-                $first = $_GET['first'];
+                $first = htmlspecialchars($_GET['first']);
                 echo '<input type="text" name="first" placeholder="Firstname" value="'.$first.'"><br/>';
             }
             else{
                 echo '<input type="text" name="first" placeholder="Firstname"><br/>';
             }
             if(isset($_GET['last'])){
-                $last = $_GET['last'];
+                $last = htmlspecialchars($_GET['last']);
                 echo '<input type="text" name="last" placeholder="Lastname" value="'.$last.'"><br/>';
             }
             else{
                 echo '<input type="text" name="last" placeholder="Lastname"><br/>';
             }
             if(isset($_GET['email'])){
-                $email = $_GET['email'];
+                $email = htmlspecialchars($_GET['email']);
                 echo '<input type="text" name="email" placeholder="E-mail" value="'.$email.'"><br/>';
             }
             else{
                 echo '<input type="text" name="email" placeholder="E-mail"><br/>';
             }
             if(isset($_GET['uid'])){
-                $uid = $_GET['uid'];
+                $uid = htmlspecialchars($_GET['uid']);
                 echo '<input type="text" name="uid" placeholder="Username" value="'.$uid.'"><br/>';
             }
             else{
@@ -48,7 +48,7 @@ include_once "header.php";
         exit();
     }
     else{
-        $signupCheck = $_GET['signup'];
+        $signupCheck = htmlspecialchars($_GET['signup']);
 
         if($signupCheck == 'empty'){
             echo "<h1>You did not fill in all fields</h1>";
@@ -71,7 +71,7 @@ include_once "header.php";
             exit();
         }
         else if($signupCheck == 'UserTaken'){
-            echo "<h1>User name all ready taken</h1>";
+            echo "<h1>Username or Email all ready taken</h1>";
             exit();
         }
         else if($signupCheck == 'logged_in'){

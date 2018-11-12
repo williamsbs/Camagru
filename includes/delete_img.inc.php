@@ -8,7 +8,7 @@ if(empty($_POST['delete']))
     exit();
 }
 else {
-    $image_Del = $_POST['delete'];
+    $image_Del = htmlspecialchars($_POST['delete']);
     $fileName = "../images/" . $image_Del . "*";
     $fileInfo = glob($fileName);
     $fileExt = explode(".", $fileInfo[0]);

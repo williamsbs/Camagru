@@ -14,7 +14,7 @@ include 'includes/dhb.inc.php';
     ?>
 </div>
 <div class="commentaire-form">
-<form action="search_results.php" method="POST">
+<form action="search_results.php" method="GET">
     <input type="text" name="search" placeholder="Search">
     <button type="submit" name="submit" value="Search">Search</button>
 </form>

@@ -16,10 +16,11 @@ elseif (isset($_POST['modif_pwd']))
 {
     ?>
     <form action="includes/modification_compte.inc.php" method="post">
-        <input type="text" name="Old_pwd" placeholder="Old password">
-        <input type="text" name="New_pwd" placeholder="New password">
+        <input type="password" name="Old_pwd" placeholder="Old password">
+        <input type="password" name="New_pwd" placeholder="New password">
         <button type="submit" name="submit_pwd">OK</button>
     </form>
+    <a href='forgot_password.php'><h1>forgot your password?</h1></a>
 <?php
 }
 elseif (isset($_POST['modif_email']))

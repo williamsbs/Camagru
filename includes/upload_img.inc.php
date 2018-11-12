@@ -4,8 +4,8 @@ include "dbh.inc.php";
 
 if(isset($_POST['submit']))
 {
-    $title = $_POST['title'];
-    $desc = $_POST['desc'];
+    $title = htmlspecialchars($_POST['title']);
+    $desc = htmlspecialchars($_POST['desc']);
 
     $file = $_FILES['file'];
 

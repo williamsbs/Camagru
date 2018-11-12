@@ -6,7 +6,7 @@ include_once "header.php";
         <form class="signup-form" method="POST" action="uploade_details2.php">
             <?php
             if(isset($_GET['title'])){
-                $title = $_GET['title'];
+                $title = htmlspecialchars($_GET['title']);
                 echo '<input type="text" name="title" placeholder="Title" value="'.$title.'"><br/>';
             }
             else{
@@ -31,7 +31,7 @@ if(!isset($_GET['details']))
     exit();
 }
 else {
-    $detailsCheck = $_GET['details'];
+    $detailsCheck = htmlspecialchars($_GET['details']);
 
     if ($detailsCheck == 'error') {
         echo "<h1>You did not fill in all fields</h1>";

@@ -5,9 +5,9 @@ if(isset($_POST['submit']))
     include "dbh.inc.php";
     include_once "handlers.inc.php";
 
-    $uid = $_POST['uid'];
-    $email = $_POST['uid'];
-    $pwd = $_POST['pwd'];
+    $uid = htmlspecialchars($_POST['uid']);
+    $email = htmlspecialchars($_POST['uid']);
+    $pwd = htmlspecialchars($_POST['pwd']);
 
     if(handlers_login($uid, $pwd) == 1)
     {
@@ -26,19 +26,24 @@ if(isset($_POST['submit']))
             {
                 if($row = $stmt->fetch(PDO::FETCH_ASSOC))
                 {
-                   if(($hasedPwd = password_verify($pwd, $row['user_pwd'])) == FALSE)// dehash le pwd;
-                    {
-                        header("Location: ../index.php?login=error");
-                        exit();
+                    if($row['user_actif'] == 1) {
+                        if (($hasedPwd = password_verify($pwd, $row['user_pwd'])) == FALSE)// dehash le pwd;
+                        {
+                            header("Location: ../index.php?login=forgot");
+                            exit();
+                        } else if ($hasedPwd == TRUE)// login the user
+                        {
+                            $_SESSION['id'] = $row['user_id'];
+                            $_SESSION['u_id'] = $row['user_uid'];
+                            $_SESSION['u_first'] = $row['user_first'];
+                            $_SESSION['u_last'] = $row['user_last'];
+                            $_SESSION['u_email'] = $row['user_email'];
+                            header("Location: ../index.php?login=sucess");
+                            exit();
+                        }
                     }
-                    else if ($hasedPwd == TRUE)// login the user
-                    {
-                        $_SESSION['id'] = $row['user_id'];
-                        $_SESSION['u_id'] = $row['user_uid'];
-                        $_SESSION['u_first'] = $row['user_first'];
-                        $_SESSION['u_last'] = $row['user_last'];
-                        $_SESSION['u_email'] = $row['user_email'];
-                        header("Location: ../index.php?login=sucess");
+                    else{
+                        header("Location: ../index.php?login=Notactif");
                         exit();
                     }
                 }

@@ -1,10 +1,10 @@
 <?php
 session_start();
 include "dbh.inc.php";
-$image = $_GET['image'];
+$image = htmlspecialchars($_GET['image']);
 if(isset($_POST['submit']))
 {
-    $commentaire = $_POST['commentaire'];
+    $commentaire = htmlspecialchars($_POST['commentaire']);
     $user = $_SESSION['u_id'];
     $date = date('d/m/Y');
     $sql = "INSERT INTO commentaire (user_id, commentaire, image, a_date)

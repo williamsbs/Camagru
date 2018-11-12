@@ -5,22 +5,22 @@ session_start();
         include "dbh.inc.php";
         include_once "handlers.inc.php";
 
-        $first = $_POST['first']; //mysqli_real_escape_string transforme l'input en charactere, si portege contre du code
-        $last = $_POST['last'];
-        $email = $_POST['email'];
-        $uid = $_POST['uid'];
-        $pwd = $_POST['pwd'];
+        $first = htmlspecialchars($_POST['first']); //mysqli_real_escape_string transforme l'input en charactere, si portege contre du code
+        $last = htmlspecialchars($_POST['last']);
+        $email = htmlspecialchars($_POST['email']);
+        $uid = htmlspecialchars($_POST['uid']);
+        $pwd = htmlspecialchars($_POST['pwd']);
         $cle = md5(microtime(TRUE)*100000);
 
         if (handlers_signup($first, $last, $email, $uid, $pwd) == 1)
         {
-            $sql = "SELECT * FROM users WHERE user_uid=?;";
+            $sql = "SELECT * FROM users WHERE user_uid=? OR user_email=?;";
             $stmt = $connexion->prepare($sql);
             if (!$stmt = $connexion->prepare($sql))
                 echo "SQL statement error";
             else
             {
-                $stmt->execute(array($uid));
+                $stmt->execute(array($uid, $email));
                 $check = $stmt->rowCount();
                 if ($check > 0)
                 {
@@ -49,22 +49,23 @@ session_start();
                             $image_value->execute(array($userid, 1));
                         }
                     }
-//                    $destinataire = $email;
-//                    $sujet = "Activer votre compte";
-//                    $entete = "From: bobsabates@gmail.com";
-//                    $message = 'Bienvenue sur VotreSite,';
-//                    mail($destinataire, $sujet, $message, $entete);
 
-//
-//                    Pour activer votre compte, veuillez cliquer sur le lien ci dessous
-//                    ou copier/coller dans votre navigateur internet.
-//
-//                    http://localhost:8080/camagru/validation.php?log='.urlencode($uid).'&cle='.urlencode($cle).'
-//
-//
-//                    ---------------
-//                    Ceci est un mail automatique, Merci de ne pas y répondre.';
-                    header("Location: ../validation.php?index.php=sucess");
+                    $sujet = "Active your account" ;
+                    $header = "From: adm@camagru.com\nMIME-Version: 1.0\nContent-Type: text/html; charset=utf-8\n";
+                    $message = '<html>
+						      <head>
+						       <title>Welcome to Camagru</title>
+						      </head>
+						      <body>
+						      <p></p>
+						       <p>To validate your account, please click on the link below or copy / paste in your internet browser.<br>http://localhost:8080/camagru/validation.php?log='.urlencode($uid).'&cle='.urlencode($cle).'<br>------------------------------------------------------------------------------------------<br>This is an automatic email, please do not reply.</p>
+						      </body>
+						     </html>';
+                    mail($email, $sujet, $message, $header);
+                    $_SESSION['cle'] = $cle;
+                    $_SESSION['uid'] = $uid;
+                    $_SESSION['email'] = $email;
+                    header("Location: ../validation.php?validation=sucess");
                     exit();
                 }
             }

@@ -2,9 +2,23 @@
 session_start();
 include_once "includes/dbh.inc.php";
 include_once "header.php";
-
 ?>
-<form action="img_galery.php" method="POST">
+    <div class="msg">
+    <?php
+    if(isset($_GET['login']))
+    {
+        $loginCheck = htmlspecialchars($_GET['login']);
+
+        if ($loginCheck == 'Notactif') {
+            echo "<h1>Your account as no been activated</h1>";
+        } else if ($loginCheck == 'forgot') {
+            echo "<a href='forgot_password.php'><h1>forgot your password?</h1></a>";
+        }else if ($loginCheck == 'envoyer') {
+            echo "<h1>An Email as been sent to reset you password</h1>";
+        }
+    }
+?>
+<form action="img_galery.php" method="GET">
     <button class="nav-login" type="submit" name="Uplaod">Upload image</button>
 </form>
 <div id="wrapper">
@@ -72,7 +86,7 @@ include_once "header.php";
     while($row = $result->fetch(PDO::FETCH_ASSOC)) {
         echo "<section class='thumbnails'>
         <div class='image_commentaire'>
-            <a href='image_commentaire.php?image=" . $row[img_name]. "'target='_blank'>
+            <a href='image_commentaire.php?image=" . $row[img_name]. "'>
                 <img  src='images/" . $row[img_name]. "' />
                 publier par: <strong>$row[user_id]</strong>
                 <h3>$row[description]</h3>

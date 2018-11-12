@@ -19,7 +19,7 @@ if(isset($_SESSION['u_id'])) {
     if (!isset($_GET['modif'])) {
         exit();
     } else {
-        $signupCheck = $_GET['modif'];
+        $signupCheck = htmlspecialchars($_GET['modif']);
 
         if ($signupCheck == 'empty') {
             echo "<h1>You did not fill in all fields</h1>";
@@ -49,6 +49,9 @@ if(isset($_SESSION['u_id'])) {
             exit();
         }elseif ($signupCheck == 'not_email') {
             echo "<h1>The New Email you entered is not a valid Email</h1>";
+            exit();
+        } else if($signupCheck == 'WrongPwdFormat'){
+            echo "<h1>Your new password must be at least 6 characters and contain one number, one letter and one capital letter</h1>";
             exit();
         }
     }

@@ -2,8 +2,8 @@
 session_start();
 include "includes/dbh.inc.php";
 include_once "header.php";
-$title = $_POST['title'];
-$description = $_POST['description'];
+$title = htmlspecialchars($_POST['title']);
+$description = htmlspecialchars($_POST['description']);
 
 if (empty($title) OR empty($description)) //verifie si tous les champs sont remplie
 {
