@@ -1,6 +1,7 @@
 <?php
 include_once 'header.php';
-include 'includes/dhb.inc.php';
+include "includes/config/database.php";
+
 ?>
 <!DOCTYPE html>
 <html>

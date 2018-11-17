@@ -1,7 +1,7 @@
 <?php
 session_start();
 include_once "header.php";
-include "includes/dbh.inc.php";
+include "includes/config/database.php";
 
 if(!isset($_GET['log']))
 {

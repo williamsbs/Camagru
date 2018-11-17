@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once "includes/dbh.inc.php";
+include "includes/config/database.php";
 include_once "header.php";
 ?>
     <div class="msg">
@@ -19,7 +19,7 @@ include_once "header.php";
     }
 ?>
 <form action="img_galery.php" method="GET">
-    <button class="nav-login" type="submit" name="Uplaod">Upload image</button>
+    <button class="nav-login" type="submit" name="Uplaod" style="margin-right:10px;;">Upload image</button>
 </form>
 <div id="wrapper">
     <header id="header"?>
@@ -169,4 +169,3 @@ for($i = 1; $i <=$pageTotales; $i++)
 echo "</div>";
 include_once "footer.php";
 ?>
-

@@ -2,7 +2,7 @@
 session_start();
 if(isset($_POST['submit']))
 {
-    include "dbh.inc.php";
+    include "config/database.php";
     include_once "handlers.inc.php";
 
     $uid = htmlspecialchars($_POST['uid']);

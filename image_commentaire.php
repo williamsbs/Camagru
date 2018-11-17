@@ -1,7 +1,7 @@
 <?php
 session_start();
 include_once "header.php";
-include "includes/dbh.inc.php";
+include "includes/config/database.php";
 
 $image = htmlspecialchars($_GET['image']);
 $sql = "SELECT * FROM uploaded_img WHERE img_name='$image'";
@@ -27,10 +27,10 @@ echo "<section class='thumbnails'>
     {
         while ($row = $result->fetch(PDO::FETCH_ASSOC))
         {
-            echo "<div class='commentaire'>
-            <h3>".$row['user_id']." :</h3>
+            echo "<div class='commentaire' style='margin: 10px 25% 0px 25%;'>
+            <h3 style='color: rgba(255, 255, 255, 0.80) !important;'>".$row['user_id']." :</h3>
             <p><strong>".$row['commentaire']."</strong></p>
-            <p>".$row['a_date']."</p>
+            <p style='color: rgba(255, 255, 255, 0.80) !important;'>".$row['a_date']."</p>
         </div>";
         }
     }
@@ -40,7 +40,7 @@ echo "<section class='thumbnails'>
     $result = $connexion->query($sql);
     echo "<fieldset class='like-box'>";
     echo "<legend><strong>Likes:</strong></legend>";
-    echo "<div >";
+    echo "<div  style='color: white !important;'>";
     if($result->rowCount() > 0) {
         while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
             echo "<div>$row[user_id]<div>";

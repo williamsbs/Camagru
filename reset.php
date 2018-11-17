@@ -1,8 +1,7 @@
 <?php
 session_start();
 include "header.php";
-include "includes/dbh.inc.php";
-
+include "includes/config/database.php";
 $sql = "SELECT * FROM users WHERE user_email='$_GET[email]'";
 $result = $connexion->query($sql);
 if($result->rowCount() == 1) {
@@ -26,9 +25,10 @@ if($result->rowCount() == 1) {
                 echo "<h1>Your password must be at least 6 characters and contain one number, one letter and one capital letter</h1>";
             }
         }
-        else{
-            echo "<h1>Please check your Emails the activation link provided is incorrect</h1>";
-        }
+    
+    }
+    else{
+        echo "<h1>Please check your Emails the activation link provided is incorrect</h1>";
     }
 }else{
     echo "<h1>Please check your mails</h1>";

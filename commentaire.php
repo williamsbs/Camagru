@@ -1,7 +1,7 @@
 <?php
 session_start();
 include_once "header.php";
-include "includes/dbh.inc.php";
+include "includes/config/database.php";
 ?>
 <div class="titre-commentaire">
     <h1>Commentaire :</h1>

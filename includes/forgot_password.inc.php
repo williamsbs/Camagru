@@ -1,5 +1,5 @@
 <?php
-include "dbh.inc.php";
+include "config/database.php";
 if(isset($_POST['submit']))
 {
     $cle = md5(microtime(TRUE)*100000);
@@ -17,7 +17,7 @@ if(isset($_POST['submit']))
         exit();
     }
     elseif($result->rowCount() == 1) {
-        $sujet = "Active your account";
+        $sujet = "Reset your password";
         $header = "From: password@camagru.com\nMIME-Version: 1.0\nContent-Type: text/html; charset=utf-8\n";
         $message = '<html>
 						      <head>

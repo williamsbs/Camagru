@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'dbh.inc.php';
+include "config/database.php";
 
 if(empty($_POST['delete']))
 {
@@ -8,14 +8,13 @@ if(empty($_POST['delete']))
     exit();
 }
 else {
-    $image_Del = htmlspecialchars($_POST['delete']);
+    $image_Del = $_POST['delete'];
     $fileName = "../images/" . $image_Del . "*";
     $fileInfo = glob($fileName);
     $fileExt = explode(".", $fileInfo[0]);
     $fileActualExt = $fileExt[3];
 
     $fileActualName = $image_Del . "." . $fileActualExt;
-
     $file = "../images/" . $image_Del . "." . $fileActualExt;
     if (!unlink($file)) {
 

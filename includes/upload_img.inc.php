@@ -1,11 +1,11 @@
 <?php
 session_start();
-include "dbh.inc.php";
+include "config/database.php";
 
 if(isset($_POST['submit']))
 {
-    $title = htmlspecialchars($_POST['title']);
-    $desc = htmlspecialchars($_POST['desc']);
+    $title = $_SESSION['title'];
+    $desc = $_SESSION['desc'];
 
     $file = $_FILES['file'];
 
@@ -38,16 +38,16 @@ if(isset($_POST['submit']))
             }
             else
             {
-                echo "Your file is to big!";
+                header("Location: ../uploade_details2.php?erro=ToBig");
             }
         }
         else
         {
-            echo "There was an error uploading your file!";
+            header("Location: ../uploade_details2.php?erro=UploadError");
         }
     }
     else
     {
-        echo "You cannot upload files of this type";
+        header("Location: ../uploade_details2.php?erro=type");
     }
 }

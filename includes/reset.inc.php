@@ -1,5 +1,7 @@
 <?php
-include "dbh.inc.php";
+session_start();
+include "config/database.php";
+
 if(isset($_POST['submit'])) {
     $New_pwd = htmlspecialchars($_POST['reset']);
 
@@ -32,7 +34,7 @@ if(isset($_POST['submit'])) {
                 $sql_pwd = "UPDATE users SET user_pwd=? WHERE user_email='$_SESSION[email]'";
                 $stmt_pwd = $connexion->prepare($sql_pwd);
                 $stmt_pwd->execute(array($New_pwd));
-                header("Location: ../compte.php?reset=success_pwd");
+                header("Location: ../compte.php?modif=success_pwd");
                 exit();
             }
         }

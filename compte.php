@@ -5,15 +5,17 @@ if(isset($_SESSION['u_id'])) {
     ?>
     <h1 style="text-align: center; text-decoration: underline">Bienvenue sur votre compte, vous pouvez y modifiez vos
         parametre</h1>
+    <div class="up_upload">
     <form action="modification_compte.php" method="post">
-        <button type="submit" name="modif_login">Modifiez votre login</button>
+        <button type="submit" name="modif_login" style="margin: 10px 50px 10px 40%">Modifiez votre login</button>
     </form>
     <form action="modification_compte.php" method="post">
-        <button type="submit" name="modif_pwd">Modifiez votre Mot de passe</button>
+        <button type="submit" name="modif_pwd" style="margin: 10px 50px 10px 40%;padding: 0px 7.9%;">Modifiez votre Mot de passe</button>
     </form>
     <form action="modification_compte.php" method="post">
-        <button type="submit" name="modif_email">Modifiez votre Email</button>
+        <button type="submit" name="modif_email" style="margin: 10px 50px 10px 40%">Modifiez votre Email</button>
     </form>
+  </div>
     <div class="msg">
     <?php
     if (!isset($_GET['modif'])) {

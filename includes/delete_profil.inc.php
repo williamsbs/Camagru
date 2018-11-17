@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'dbh.inc.php';
+include "config/database.php";
 
 $id = $_SESSION['id'];
 $uid = $_SESSION['u_id'];

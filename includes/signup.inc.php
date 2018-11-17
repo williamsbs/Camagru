@@ -2,7 +2,7 @@
 session_start();
     if (isset($_POST['submit']))
     {
-        include "dbh.inc.php";
+        include "config/database.php";
         include_once "handlers.inc.php";
 
         $first = htmlspecialchars($_POST['first']); //mysqli_real_escape_string transforme l'input en charactere, si portege contre du code

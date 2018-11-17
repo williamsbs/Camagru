@@ -1,6 +1,6 @@
 <?php
 session_start();
-include "includes/dbh.inc.php";
+include "includes/config/database.php";
 include_once "header.php";
 ?>
 <!DOCTYPE html>

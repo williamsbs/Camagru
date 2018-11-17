@@ -1,6 +1,6 @@
 <?php
 session_start();
-include "dhb.inc.php";
+include "config/database.php";
 
     $sql = "INSERT INTO uploaded_img(user_id, title, description, img_name,a_date) VALUE (?, ? ,? ,? ,?);";
     $stmt = $connexion->prepare($sql);

@@ -1,6 +1,6 @@
 <?php
 session_start();
-include "dbh.inc.php";
+include "config/database.php";
 $image = htmlspecialchars($_GET['image']);
 if(isset($_POST['submit']))
 {
@@ -14,6 +14,32 @@ if(isset($_POST['submit']))
         echo "SQL error"; else
     {
         $statement->execute(array($user, $commentaire, $image,$date));
+    }
+    $sqlCom = "SELECT * FROM uploaded_img WHERE img_name='$image';";
+    $resultCom = $connexion->query($sqlCom);
+    if($resultCom->rowCount() == 1)
+    {
+      $rowCom = $resultCom->fetch(PDO::FETCH_ASSOC);
+      $userToSendCom = $rowCom['user_id'];
+      $sqlSend = "SELECT * FROM users WHERE user_uid='$userToSendCom'";
+      $resultSend = $connexion->query($sqlSend);
+      if($resultSend->rowCount() == 1)
+      {
+        $rowSend = $resultSend->fetch(PDO::FETCH_ASSOC);
+        $emailSend = $rowSend['user_email'];
+        $sujet = "Comment" ;
+        $header = "From: adm@camagru.com\nMIME-Version: 1.0\nContent-Type: text/html; charset=utf-8\n";
+        $message = '<html>
+      <head>
+       <title>Someone commented on your picture</title>
+      </head>
+      <body>
+      <p></p>
+       <p>Someone commented on your picture</p>
+      </body>
+     </html>';
+        mail($emailSend , $sujet, $message, $header);
+      }
     }
     header("Location: ../image_commentaire.php?image=$image&commentaire=sucess");
     exit();
@@ -104,4 +130,3 @@ else
 }
 ?>
 id	user_id	image
-
