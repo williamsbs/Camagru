@@ -30,13 +30,13 @@ session_start();
                 else
                 {
                     $hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
-                    $sql = "INSERT INTO users (user_first, user_last, user_email, user_uid, user_pwd, user_cle, user_actif)
-                        VALUES (?, ?, ?, ?, ?, ?, ?);";
+                    $sql = "INSERT INTO users (user_first, user_last, user_email, user_uid, user_pwd, user_cle, user_actif, com_send)
+                        VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
                     $statement = $connexion->prepare($sql);
                     if (!$statement = $connexion->prepare($sql)) // preprar une reauete SQL query, pour la session de travail $statement
                         echo "SQL error";
                     else
-                        $statement->execute(array($first, $last, $email, $uid, $hashedPwd, $cle, 0));
+                        $statement->execute(array($first, $last, $email, $uid, $hashedPwd, $cle, 0, 1));
                     $sql = "SELECT * FROM users WHERE user_uid='$uid' AND user_first='$first';";
                     $result = $connexion->query($sql);
                     if ($result->rowCount() > 0)

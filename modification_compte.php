@@ -1,6 +1,8 @@
 <?php
 session_start();
 include_once "header.php";
+include "includes/config/database.php";
+
 
 if (isset($_POST['modif_login']))
 {
@@ -32,6 +34,29 @@ elseif (isset($_POST['modif_email']))
         <button type="submit" name="submit_email">OK</button>
     </form>
     <?php
+}
+elseif (isset($_POST['modif_email_default']))
+{
+
+  $sqlCom = "SELECT * FROM users WHERE user_uid='$_SESSION[u_id]';";
+  $resultCom = $connexion->query($sqlCom);
+  $rowCom = $resultCom->fetch(PDO::FETCH_ASSOC);
+  if($rowCom['com_send'] == 1)
+  {
+    $sqlUp = "UPDATE users SET com_send='0' WHERE user_uid='$_SESSION[u_id]';";
+    $stmtUp = $connexion->prepare($sqlUp);
+    $stmtUp->execute();
+    header("Location: compte.php?modif=desactiver");
+    exit();
+  }
+  elseif($rowCom['com_send'] == 0)
+  {
+    $sqlUp = "UPDATE users SET com_send='1' WHERE user_uid='$_SESSION[u_id]';";
+    $stmtUp = $connexion->prepare($sqlUp);
+    $stmtUp->execute();
+    header("Location: compte.php?modif=activer");
+    exit();
+  }
 }
 else{
     header("Location: compte.php?modif=error");

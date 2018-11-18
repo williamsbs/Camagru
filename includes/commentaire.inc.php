@@ -26,6 +26,8 @@ if(isset($_POST['submit']))
       if($resultSend->rowCount() == 1)
       {
         $rowSend = $resultSend->fetch(PDO::FETCH_ASSOC);
+        if($rowSend['com_send'] == 1)
+        {
         $emailSend = $rowSend['user_email'];
         $sujet = "Comment" ;
         $header = "From: adm@camagru.com\nMIME-Version: 1.0\nContent-Type: text/html; charset=utf-8\n";
@@ -39,6 +41,7 @@ if(isset($_POST['submit']))
       </body>
      </html>';
         mail($emailSend , $sujet, $message, $header);
+      }
       }
     }
     header("Location: ../image_commentaire.php?image=$image&commentaire=sucess");

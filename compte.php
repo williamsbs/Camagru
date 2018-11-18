@@ -7,13 +7,16 @@ if(isset($_SESSION['u_id'])) {
         parametre</h1>
     <div class="up_upload">
     <form action="modification_compte.php" method="post">
-        <button type="submit" name="modif_login" style="margin: 10px 50px 10px 40%">Modifiez votre login</button>
+        <button type="submit" name="modif_login" style="margin: 10px 50px 10px 35%">Modifiez votre login</button>
     </form>
     <form action="modification_compte.php" method="post">
-        <button type="submit" name="modif_pwd" style="margin: 10px 50px 10px 40%;padding: 0px 7.9%;">Modifiez votre Mot de passe</button>
+        <button type="submit" name="modif_pwd" style="margin: 10px 50px 10px 35%;padding: 0px 7.9%;">Modifiez votre Mot de passe</button>
     </form>
     <form action="modification_compte.php" method="post">
-        <button type="submit" name="modif_email" style="margin: 10px 50px 10px 40%">Modifiez votre Email</button>
+        <button type="submit" name="modif_email" style="margin: 10px 50px 10px 35%">Modifiez votre Email</button>
+    </form>
+    <form action="modification_compte.php" method="post">
+        <button type="submit" name="modif_email_default" style="margin: 10px 50px 10px 35%;padding: 0px 7.9%;">Desactiver/Activer les email</button>
     </form>
   </div>
     <div class="msg">
@@ -30,10 +33,10 @@ if(isset($_SESSION['u_id'])) {
             echo "<h1>There is a probleme please logout</h1>";
             exit();
         } elseif ($signupCheck == 'match') {
-            echo "<h1>The fiels you filled were incorrect</h1>";
+            echo "<h1>The fields you filled were incorrect</h1>";
             exit();
         }elseif ($signupCheck == 'success_login') {
-            echo "<h1>Your login as been changed to: $_SESSION[u_id]</h1>";
+            echo "<h1>Your login has been changed to: $_SESSION[u_id]</h1>";
             exit();
         }elseif ($signupCheck == 'success_pwd') {
             echo "<h1>Your passeword as been changed</h1>";
@@ -54,6 +57,12 @@ if(isset($_SESSION['u_id'])) {
             exit();
         } else if($signupCheck == 'WrongPwdFormat'){
             echo "<h1>Your new password must be at least 6 characters and contain one number, one letter and one capital letter</h1>";
+            exit();
+        }else if($signupCheck == 'desactiver'){
+            echo "<h1>You will no longer recive email went someone comments on your pictures</h1>";
+            exit();
+        }else if($signupCheck == 'activer'){
+            echo "<h1>You will now recive email went someone comments on your pictures</h1>";
             exit();
         }
     }

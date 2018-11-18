@@ -7,7 +7,11 @@ $description = $_SESSION['desc'];
 $filtre = $_GET['filtre'];
 $img =($_POST['img']);
 //-----------------------------------------------------REDIMENTION---------------------------------------------------------------------------------------------
-
+if(!isset($_SESSION['u_id']))
+{
+  header("Location: index.php");
+  exit();
+}
 if (isset($_POST['img'])) {
 
     function resize_image($file, $w, $h, $crop = FALSE)
@@ -99,6 +103,7 @@ if(isset($_POST['annule']))
   unlink($file);
   header("Location: img_galery.php");
 }
+
 //-----------------------------------------------------FROM---------------------------------------------------------------------------------------------
 echo '<div class="upload_img">
 <form action="webcam.php" method="POST">
@@ -112,16 +117,30 @@ echo '<div class="upload_img">
 </form>
 </div>';
 //-----------------------------------------------------FROM---------------------------------------------------------------------------------------------
-
-echo '<aside id="" style="height:500px;float:right">
-      <img src="imagesTmp/'.$title.'.png" style="width:80%" >
-    </aside>';
-
+clearstatcache();
+$dir = "imagesTmp/";
+if (is_dir_empty("imagesTmp/"))
+{
+}
+else {
+  echo '<aside id="" style="height:500px;float:right">
+        <img src="imagesTmp/'.$title.'.png" style="width:80%" >
+      </aside>';
+}
+function is_dir_empty($dir) {
+  if (!is_readable($dir)) return NULL;
+  return (count(scandir($dir)) == 2);
+}
 echo '
 <video id="video"></video>
-<video id="video"></video>
-<canvas id="canvas"></canvas>
-<button id="startbutton">Prendre une photo</button>';
+<canvas id="canvas"></canvas>';
+if(!empty($filtre))
+{
+echo '<button id="startbutton">Prendre une photo</button>';
+}
+else {
+  echo '<div id="startbutton"></div>';
+}
 //-----------------------------------------------------FILTERS---------------------------------------------------------------------------------------------
 
 ?>
@@ -150,24 +169,32 @@ echo '
         navigator.mozGetUserMedia ||
         navigator.msGetUserMedia);
 
-    navigator.getMedia(
-        {
-            video: true,
-            audio: false
-        },
-        function(stream) {
-            if (navigator.mozGetUserMedia) {
-                video.mozSrcObject = stream;
-            } else {
-                var vendorURL = window.URL || window.webkitURL;
-                video.src = vendorURL.createObjectURL(stream);
-            }
-            video.play();
-        },
-        function(err) {
-            console.log("An error occured! " + err);
-        }
-    );
+    if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+  	    navigator.mediaDevices.getUserMedia({ video: true }).then(function(stream) {
+  	        video.src = window.URL.createObjectURL(stream);
+  	        video.play();
+  	    });
+  	}
+    
+    //
+    // navigator.getMedia(
+    //     {
+    //         video: true,
+    //         audio: false
+    //     },
+    //     function(stream) {
+    //         if (navigator.mediaDevices.getUserMedia) {
+    //             video.mozSrcObject = stream;
+    //         } else {
+    //             var vendorURL = window.URL || window.webkitURL;
+    //             video.src = vendorURL.createObjectURL(stream);
+    //         }
+    //         video.play();
+    //     },
+    //     function(err) {
+    //         console.log("An error occured! " + err);
+    //     }
+    // );
 
     video.addEventListener('canplay', function(ev){
         if (!streaming) {

@@ -53,7 +53,7 @@ try
       `a_date` varchar(256) NOT NULL
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8;');
     $bdd->query('INSERT INTO `uploaded_img` (`id`, `user_id`, `title`, `description`, `img_name`, `nb_likes`, `a_date`) VALUES
-    (12, "yadouble", "Amsterdam", "Voyage d\'anniversaire a Amsterdam", "Amsterdam.jpg", 0, "07/11/2018"),
+    (12, "yadouble", "Amsterdam", "Voyage d\'anniversaire a Amsterdam", "Amsterdam.jpg", 2, "07/11/2018"),
     (14, "wsabates", "plage", "Image de la plage en Angleterre <3", "plage.jpg", 1, "07/11/2018"),
     (15, "tristax", "Ball lycée", "Ball du lycée de William, on le voit avec ses potes, il est vraiment beau", "Ball lycée.jpg", 0, "08/11/2018"),
     (16, "tristax", "Couché de soleil", "Coucher de soleil a Amsterdam", "Couché de soleil.jpg", 0, "08/11/2018"),
@@ -68,13 +68,14 @@ try
       `user_uid` varchar(256) NOT NULL,
       `user_pwd` varchar(256) NOT NULL,
       `user_cle` varchar(256) NOT NULL,
-      `user_actif` int(11) NOT NULL
+      `user_actif` int(11) NOT NULL,
+			`com_send` int(11) NOT NULL
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8;');
 
-    $bdd->query('INSERT INTO `users` (`user_id`, `user_first`, `user_last`, `user_email`, `user_uid`, `user_pwd`, `user_cle`, `user_actif`) VALUES
-    (12, "yannis", "doublet", "yannis4@gmail.com", "yadouble", "$2y$10$3A7vv3vB9FvGb71bJRYFzupLg1070/2zmOzsIvpftCcS9MeCBMJaK", "20fe9ef40657276f67e33db157a1dcd1", 0),
-    (16, "tristan", "leveque", "tristan@gmail.com", "tristax", "$2y$10$30z6E/kH0rDM0FXgz0.mB.qTg.cKutNK9P36Lu8uNYUhgGluG./DW", "492b060a5985ea74f1f5cb550c188648", 0),
-    (17, "William", "Sabates", "bobsabates@gmail.com", "wsabates", "$2y$10$xfWMhKOLME/4t5ZrjT1FKekh6mMsq5LQTjUfy4SJljQQghR1OrKt.", "91b9b74f5bbbaef4c845b96e2c67d628", 1);');
+    $bdd->query('INSERT INTO `users` (`user_id`, `user_first`, `user_last`, `user_email`, `user_uid`, `user_pwd`, `user_cle`, `user_actif`, `com_send`) VALUES
+    (12, "yannis", "doublet", "yannis4@gmail.com", "yadouble", "$2y$10$3A7vv3vB9FvGb71bJRYFzupLg1070/2zmOzsIvpftCcS9MeCBMJaK", "20fe9ef40657276f67e33db157a1dcd1", 0, 1),
+    (16, "tristan", "leveque", "tristan@gmail.com", "tristax", "$2y$10$30z6E/kH0rDM0FXgz0.mB.qTg.cKutNK9P36Lu8uNYUhgGluG./DW", "492b060a5985ea74f1f5cb550c188648", 0, 1),
+    (17, "William", "Sabates", "bobsabates@gmail.com", "wsabates", "$2y$10$xfWMhKOLME/4t5ZrjT1FKekh6mMsq5LQTjUfy4SJljQQghR1OrKt.", "91b9b74f5bbbaef4c845b96e2c67d628", 1, 1);');
 
      	$bdd->query('ALTER TABLE `commentaire`
         ADD PRIMARY KEY (`id`);');
