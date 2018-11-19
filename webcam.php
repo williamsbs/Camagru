@@ -5,70 +5,14 @@ include_once "header.php";
 $title = $_SESSION['title'];
 $description = $_SESSION['desc'];
 $filtre = $_GET['filtre'];
-$img =($_POST['img']);
+$img = ($_POST['img']);
 //-----------------------------------------------------REDIMENTION---------------------------------------------------------------------------------------------
 if(!isset($_SESSION['u_id']))
 {
   header("Location: index.php");
   exit();
 }
-if (isset($_POST['img'])) {
 
-    function resize_image($file, $w, $h, $crop = FALSE)
-    {
-        list($width, $height) = getimagesize($file);
-        $r = $width / $height;
-        if ($crop) {
-            if ($width > $height) {
-                $width = ceil($width - ($width * abs($r - $w / $h)));
-            } else {
-                $height = ceil($height - ($height * abs($r - $w / $h)));
-            }
-            $newwidth = $w;
-            $newheight = $h;
-        } else {
-            if ($w / $h > $r) {
-                $newwidth = $h * $r;
-                $newheight = $h;
-            } else {
-                $newheight = $w / $r;
-                $newwidth = $w;
-            }
-        }
-        $src = imagecreatefrompng($file);
-        $dst = imagecreate($newwidth, $newheight);
-
-        imagecopyresampled($dst, $src, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
-        return $dst;
-    }
-//-----------------------------------------------------CALQUE---------------------------------------------------------------------------------------------
-
-    $source = resize_image("images/filtre/filtre$_POST[filtre].png", 300, 300);
-    $largeur_source = imagesx($source);
-    $hauteur_source = imagesy($source);
-    imagealphablending($source, true);
-    imagesavealpha($source, true);
-
-    $img = $_POST['img'];
-    $img = str_replace('data:image/png;base64,', '', $img);
-    $img = str_replace(' ', '+', $img);
-    $img = base64_decode($img);
-    $destination = imagecreatefromstring($img);
-    $largeur_destination = imagesx($destination);
-    $hauteur_destination = imagesy($destination);
-
-    $destination_x = ($largeur_destination - $largeur_source) / 2;
-    $destination_y = ($hauteur_destination - $hauteur_source)/2;
-
-    imagecopymerge($destination, $source, $destination_x, $destination_y, 0, 0, $largeur_source, $hauteur_source, 300);
-    imagecopy($destination, $source, $destination_x, $destination_y, 0, 0, $largeur_source, $hauteur_source);
-
-    $name = $title.".png";
-    imagepng($destination, "imagesTmp/$name");
-    imagedestroy($source);
-    imagedestroy($destination);
-    header("Refresh:0; url=webcam.php");
-}
 //-----------------------------------------------------UPLOAD---------------------------------------------------------------------------------------------
 
 if(isset($_POST['upload']))
@@ -121,19 +65,19 @@ clearstatcache();
 $dir = "imagesTmp/";
 if (is_dir_empty("imagesTmp/"))
 {
+    file_put_contents("imagesTmp/$title.png", NULL);
 }
-else {
-  echo '<aside id="" style="height:500px;float:right">
-        <img src="imagesTmp/'.$title.'.png" style="width:80%" >
+    echo '<aside style="display:none;height:500px;float:right">
+        <img id="imagenew" src="imagesTmp/' . $title . '.png" style="width:80%" >
       </aside>';
-}
+
 function is_dir_empty($dir) {
   if (!is_readable($dir)) return NULL;
   return (count(scandir($dir)) == 2);
 }
 echo '
 <video id="video"></video>
-<canvas id="canvas"></canvas>';
+<canvas id="canvas" style="display:none;"></canvas>';
 if(!empty($filtre))
 {
 echo '<button id="startbutton">Prendre une photo</button>';
@@ -171,30 +115,10 @@ else {
 
     if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
   	    navigator.mediaDevices.getUserMedia({ video: true }).then(function(stream) {
-  	        video.src = window.URL.createObjectURL(stream);
+  	        video.srcObject = stream;
   	        video.play();
   	    });
   	}
-    
-    //
-    // navigator.getMedia(
-    //     {
-    //         video: true,
-    //         audio: false
-    //     },
-    //     function(stream) {
-    //         if (navigator.mediaDevices.getUserMedia) {
-    //             video.mozSrcObject = stream;
-    //         } else {
-    //             var vendorURL = window.URL || window.webkitURL;
-    //             video.src = vendorURL.createObjectURL(stream);
-    //         }
-    //         video.play();
-    //     },
-    //     function(err) {
-    //         console.log("An error occured! " + err);
-    //     }
-    // );
 
     video.addEventListener('canplay', function(ev){
         if (!streaming) {
@@ -214,17 +138,21 @@ else {
 
             var xmlhttp = new XMLHttpRequest();
             xmlhttp.onreadystatechange = function () {
-                document.getElementById('canvas').innerHTML = xmlhttp.responseText;
+                if (this.readyState == 4 && this.status == 200)
+                {
+                    document.getElementById('imagenew').src = xmlhttp.responseText;
+                    document.getElementById('imagenew').parentElement.style.display= "inline";
+                }
             }
-            xmlhttp.open("POST", "webcam.php", true);
+            xmlhttp.open("POST", "webcamsave.php", true);
             xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
             xmlhttp.send("img=" + data + "&title=" + title + "&description=" + desc + "&filtre=" + filtre);
-            window.location.reload();
+            // window.location.reload();
         }
     startbutton.addEventListener('click', function (ev) {
         takepicture();
         ev.preventDefault();
-        window.location.reload();
+        // window.location.reload();
     }, false);
     })();
 </script>

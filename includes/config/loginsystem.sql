@@ -43,9 +43,9 @@ CREATE TABLE `commentaire` (
 INSERT INTO `commentaire` (`id`, `user_id`, `commentaire`, `image`, `a_date`) VALUES
 (7, 'wsabates', 'yo', 'plage.jpg', '06/11/2018'),
 (8, 'wsabates', 'salut', 'plage.jpg', '06/11/2018'),
-(10, 'yadouble', 'Amsterdam', 'Amsterdam.jpg', '07/11/2018'),
+(10, 'yadouble', 'Amsterdam', 'amster.jpg', '07/11/2018'),
 (11, 'tristax', 'super photo William tu gère !', 'plage.jpg', '08/11/2018'),
-(13, 'wsabates', 'bonjour', 'Amsterdam.jpg', '09/11/2018');
+(13, 'wsabates', 'bonjour', 'amster.jpg', '09/11/2018');
 
 -- --------------------------------------------------------
 
@@ -66,8 +66,8 @@ CREATE TABLE `likes` (
 
 INSERT INTO `likes` (`id`, `user_id`, `image`, `likes`) VALUES
 (47, 'wsabates', 'louvre.jpg', 1),
-(48, 'wsabates', 'Amsterdam.jpg', 1),
-(49, 'yadouble', 'Amsterdam.jpg', 1),
+(48, 'wsabates', 'amster.jpg', 1),
+(49, 'yadouble', 'amster.jpg', 1),
 (50, 'tristax', 'plage.jpg', 1),
 (51, 'wsabates', 'new5bead993783da.png', 1),
 (52, 'wsabates', 'test.png', 1);

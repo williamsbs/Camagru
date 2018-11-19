@@ -42,6 +42,15 @@ else
 
 echo "</div>";
 echo "</div>";
+
+if (!is_dir_empty("imagesTmp/"))
+{
+   unlink("imagesTmp/$_SESSION[title].png");
+}
+function is_dir_empty($dir) {
+    if (!is_readable($dir)) return NULL;
+    return (count(scandir($dir)) == 2);
+}
 ?>
 <?php
 include_once "footer.php";

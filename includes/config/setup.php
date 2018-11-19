@@ -21,9 +21,9 @@ try
 	$bdd->query('INSERT INTO `commentaire` (`id`, `user_id`, `commentaire`, `image`, `a_date`) VALUES
   (7, "wsabates", "yo", "plage.jpg", "06/11/2018"),
   (8, "wsabates", "salut", "plage.jpg", "06/11/2018"),
-  (10, "yadouble", "Amsterdam", "Amsterdam.jpg", "07/11/2018"),
+  (10, "yadouble", "Amsterdam", "amster.jpg", "07/11/2018"),
   (11, "tristax", "super photo William tu gère !", "plage.jpg", "08/11/2018"),
-  (13, "wsabates", "bonjour", "Amsterdam.jpg", "09/11/2018");');
+  (13, "wsabates", "bonjour", "amster.jpg", "09/11/2018");');
   $bdd->query('CREATE TABLE `likes` (
     `id` int(11) NOT NULL,
     `user_id` varchar(256) NOT NULL,
@@ -33,8 +33,8 @@ try
 								');
     $bdd->query('INSERT INTO `likes` (`id`, `user_id`, `image`, `likes`) VALUES
     (47, "wsabates", "louvre.jpg", 1),
-    (48, "wsabates", "Amsterdam.jpg", 1),
-    (49, "yadouble", "Amsterdam.jpg", 1),
+    (48, "wsabates", "amster.jpg", 1),
+    (49, "yadouble", "amster.jpg", 1),
     (50, "tristax", "plage.jpg", 1);');
     $bdd->query('CREATE TABLE `profil_img` (
       `id` int(11) NOT NULL,
@@ -53,7 +53,7 @@ try
       `a_date` varchar(256) NOT NULL
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8;');
     $bdd->query('INSERT INTO `uploaded_img` (`id`, `user_id`, `title`, `description`, `img_name`, `nb_likes`, `a_date`) VALUES
-    (12, "yadouble", "Amsterdam", "Voyage d\'anniversaire a Amsterdam", "Amsterdam.jpg", 2, "07/11/2018"),
+    (12, "yadouble", "Amsterdam", "Voyage d\'anniversaire a Amsterdam", "amster.jpg", 2, "07/11/2018"),
     (14, "wsabates", "plage", "Image de la plage en Angleterre <3", "plage.jpg", 1, "07/11/2018"),
     (15, "tristax", "Ball lycée", "Ball du lycée de William, on le voit avec ses potes, il est vraiment beau", "Ball lycée.jpg", 0, "08/11/2018"),
     (16, "tristax", "Couché de soleil", "Coucher de soleil a Amsterdam", "Couché de soleil.jpg", 0, "08/11/2018"),

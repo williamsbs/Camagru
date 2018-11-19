@@ -8,9 +8,10 @@ if(empty($_POST['delete']))
     exit();
 }
 else {
-    $sqlCheck = "SELECT * FROM uploaded_img WHERE img_name='$_POST[delete]';";
+    $sqlCheck = "SELECT * FROM uploaded_img WHERE img_name='$_POST[delete].png';";
     $resultsCheck = $connexion->query($sqlCheck);
     $row = $resultsCheck->fetch(PDO::FETCH_ASSOC);
+    echo $_POST['delete'];
     if($row['user_id'] == $_SESSION['u_id']) {
         $image_Del = $_POST['delete'];
         $fileName = "../images/" . $image_Del . "*";
