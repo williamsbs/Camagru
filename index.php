@@ -49,7 +49,7 @@ include_once "header.php";
                         }
                     }
                 if(!isset($_SESSION['u_id']))
-                    echo "<a href='upload_profil_Img.php'><img src='images/thumbs/04.jpg'></a>";
+                    echo "<a href='upload_profil_Img.php'><img src='images/fulls/01.jpg'></a>";
                     ?>
             </span>
             <?php if(isset($_SESSION['u_id'])){?>

@@ -3,6 +3,8 @@ session_start();
 include_once "header.php";
 include "includes/config/database.php";
 
+if(!empty($_GET['image']))
+{
 $image = htmlspecialchars($_GET['image']);
 $sql = "SELECT * FROM uploaded_img WHERE img_name='$image'";
 $result = $connexion->query($sql);
@@ -23,14 +25,12 @@ echo "<section class='thumbnails'>
     <?php
     $sql = "SELECT * FROM commentaire WHERE image='$image';";
     $result = $connexion->query($sql);
-    if ($result->rowCount() > 0)
-    {
-        while ($row = $result->fetch(PDO::FETCH_ASSOC))
-        {
+    if ($result->rowCount() > 0) {
+        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
             echo "<div class='commentaire' style='margin: 10px 25% 0px 25%;'>
-            <h3 style='color: rgba(255, 255, 255, 0.80) !important;'>".$row['user_id']." :</h3>
-            <p><strong>".$row['commentaire']."</strong></p>
-            <p style='color: rgba(255, 255, 255, 0.80) !important;'>".$row['a_date']."</p>
+            <h3 style='color: rgba(255, 255, 255, 0.80) !important;'>" . $row['user_id'] . " :</h3>
+            <p><strong>" . $row['commentaire'] . "</strong></p>
+            <p style='color: rgba(255, 255, 255, 0.80) !important;'>" . $row['a_date'] . "</p>
         </div>";
         }
     }
@@ -41,19 +41,18 @@ echo "<section class='thumbnails'>
     echo "<fieldset class='like-box'>";
     echo "<legend><strong>Likes:</strong></legend>";
     echo "<div  style='color: white !important;'>";
-    if($result->rowCount() > 0) {
+    if ($result->rowCount() > 0) {
         while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
             echo "<div>$row[user_id]<div>";
         }
-    }else{
+    } else {
         echo "Nobody as liked this picture";
     }
     echo "</div>";
     echo "</fieldset>";
 
-    if(isset($_SESSION['u_id']))
-{
-    echo "
+    if (isset($_SESSION['u_id'])) {
+        echo "
     <div class='commentaire-form'>
         <form action='includes/commentaire.inc.php?image=" . $image . "' method='POST'>
             <input type='text' name='commentaire' placeholder='Commentaire'>
@@ -67,8 +66,8 @@ echo "<section class='thumbnails'>
         </form>
     </>
     ";
-}
-
+    }
+    }
 ?>
     <div class="msg">
     <?php

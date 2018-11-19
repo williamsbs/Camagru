@@ -98,8 +98,9 @@ try
       $bdd->query('ALTER TABLE `users`
         MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;');
 	session_start();
-	unset($_SESSION['id']);
-	unset($_SESSION['login']);
+	unset($_SESSION['u_id']);
+    session_unset();
+    session_destroy();
 	echo '<script>document.location.href="../../index.php";</script>';
 	exit();
 }
